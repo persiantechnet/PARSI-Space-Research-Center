@@ -2,32 +2,40 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="theme-color" content="#0a0e1a">
-    <meta name="description" content="PARSI Space Data Center - مرکز داده جامع فضایی | جمع‌آوری و پردازش داده‌های فضایی، ارتباطات و سیگنال‌ها">
+    <meta name="description" content="PARSI Space Data Center - مرکز داده فضایی پارسی | جمع‌آوری و پردازش داده‌های فضایی">
+    
     <title>PARSI Space Data Center | مرکز داده فضایی پارسی</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         /* ============================================================
-                   ROOT VARIABLES
+                   CSS ROOT VARIABLES
                    ============================================================ */
         :root {
             --bg-primary: #0a0e1a;
             --bg-secondary: #111827;
             --bg-card: #1a2332;
-            --bg-card-dark: #0f1628;
             --bg-card-hover: #24304a;
+            --bg-card-dark: #0f1628;
+            --bg-gradient: linear-gradient(135deg, #0a0e1a, #1a2332);
+            
             --border-color: rgba(0, 212, 255, 0.06);
             --border-glow: rgba(0, 212, 255, 0.12);
+            --border-gold: rgba(201, 168, 76, 0.1);
             
             --signal-blue: #00d4ff;
             --signal-blue-dark: #0099cc;
             --signal-blue-glow: rgba(0, 212, 255, 0.15);
             
             --gold: #c9a84c;
+            --gold-dark: #a8883a;
             --gold-glow: rgba(201, 168, 76, 0.15);
             
             --neon-green: #00ff88;
@@ -38,41 +46,111 @@
             --text-primary: #f1f5f9;
             --text-secondary: #cbd5e1;
             --text-muted: #64748b;
+            --text-dark: #334155;
             
             --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
             --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.02);
+            --shadow-gold: 0 0 60px rgba(201, 168, 76, 0.05);
             
             --radius: 8px;
             --radius-lg: 16px;
             --radius-xl: 24px;
+            --radius-2xl: 32px;
             
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            
             --font-tech: 'Orbitron', sans-serif;
             --font-main: 'Vazirmatn', sans-serif;
             
             --header-height: 70px;
-            --sidebar-width: 260px;
+            --sidebar-width: 240px;
         }
 
         /* ============================================================
-                   RESET
+                   RESET & BASE
                    ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        
         body {
             font-family: var(--font-main);
             background: var(--bg-primary);
             color: var(--text-primary);
             direction: rtl;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.02), transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(201, 168, 76, 0.01), transparent 50%);
         }
 
-        ::selection { background: var(--signal-blue); color: var(--bg-primary); }
+        ::selection {
+            background: var(--signal-blue);
+            color: var(--bg-primary);
+        }
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--signal-blue); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, var(--signal-blue), var(--gold));
+            border-radius: 3px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* ============================================================
+                   ANIMATIONS
+                   ============================================================ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes signalPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0; }
+        }
+
+        @keyframes floatItem {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .animate-in:nth-child(1) { animation-delay: 0.05s; }
+        .animate-in:nth-child(2) { animation-delay: 0.1s; }
+        .animate-in:nth-child(3) { animation-delay: 0.15s; }
+        .animate-in:nth-child(4) { animation-delay: 0.2s; }
+        .animate-in:nth-child(5) { animation-delay: 0.25s; }
+        .animate-in:nth-child(6) { animation-delay: 0.3s; }
 
         /* ============================================================
                    HEADER
@@ -84,13 +162,21 @@
             left: 0;
             height: var(--header-height);
             background: rgba(10, 14, 26, 0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 24px;
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 14, 26, 0.98);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+            border-bottom-color: var(--border-glow);
         }
 
         .header .logo {
@@ -100,8 +186,8 @@
         }
 
         .header .logo .icon {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, var(--signal-blue), var(--gold));
             border-radius: 50%;
             display: flex;
@@ -110,6 +196,16 @@
             font-size: 1.2rem;
             color: var(--bg-primary);
             box-shadow: 0 0 40px var(--signal-blue-glow);
+            position: relative;
+        }
+
+        .header .logo .icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            animation: ringPulse 3s ease-in-out infinite;
         }
 
         .header .logo h1 {
@@ -117,19 +213,21 @@
             font-size: 0.85rem;
             font-weight: 700;
             color: var(--text-primary);
+            letter-spacing: 0.5px;
         }
 
         .header .logo span {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
             display: block;
             font-family: var(--font-tech);
+            letter-spacing: 1px;
         }
 
         .header .status-bar {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
         }
 
         .header .status-bar .item {
@@ -137,8 +235,9 @@
             align-items: center;
             gap: 6px;
             font-family: var(--font-tech);
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--text-muted);
+            letter-spacing: 0.5px;
         }
 
         .header .status-bar .item .dot {
@@ -146,7 +245,33 @@
             height: 8px;
             border-radius: 50%;
         }
-        .header .status-bar .item .dot.online { background: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+
+        .header .status-bar .item .dot.online {
+            background: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .header .status-bar .item .dot.warning {
+            background: var(--neon-orange);
+            box-shadow: 0 0 20px rgba(255, 136, 0, 0.2);
+        }
+
+        .header .status-bar .item i {
+            font-size: 0.8rem;
+            color: var(--signal-blue);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+        }
 
         /* ============================================================
                    SIDEBAR
@@ -166,6 +291,18 @@
             transition: var(--transition);
         }
 
+        .sidebar::-webkit-scrollbar { width: 3px; }
+
+        .sidebar .section-title {
+            font-family: var(--font-tech);
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 20px;
+            opacity: 0.5;
+        }
+
         .sidebar .nav-item {
             display: flex;
             align-items: center;
@@ -174,28 +311,45 @@
             color: var(--text-muted);
             transition: var(--transition);
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border-right: 2px solid transparent;
         }
 
-        .sidebar .nav-item:hover { background: rgba(0, 212, 255, 0.03); color: var(--text-primary); }
+        .sidebar .nav-item:hover {
+            background: rgba(0, 212, 255, 0.03);
+            color: var(--text-primary);
+        }
+
         .sidebar .nav-item.active {
             color: var(--signal-blue);
             border-right-color: var(--signal-blue);
             background: rgba(0, 212, 255, 0.04);
         }
-        .sidebar .nav-item i { width: 20px; }
+
+        .sidebar .nav-item i {
+            width: 20px;
+            font-size: 1rem;
+        }
+
         .sidebar .nav-item .badge {
             margin-right: auto;
             padding: 2px 10px;
             border-radius: 12px;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             font-family: var(--font-tech);
             background: rgba(0, 212, 255, 0.06);
             color: var(--signal-blue);
         }
-        .sidebar .nav-item .badge.danger { background: rgba(255, 0, 68, 0.1); color: var(--neon-red); }
-        .sidebar .nav-item .badge.success { background: rgba(0, 255, 136, 0.1); color: var(--neon-green); }
+
+        .sidebar .nav-item .badge.danger {
+            background: rgba(255, 0, 68, 0.1);
+            color: var(--neon-red);
+        }
+
+        .sidebar .nav-item .badge.success {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--neon-green);
+        }
 
         /* ============================================================
                    MAIN CONTENT
@@ -208,76 +362,112 @@
         }
 
         /* ============================================================
-                   HERO - DATA CENTER
+                   HERO
                    ============================================================ */
-        .hero-datacenter {
-            background: 
-                radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, 0.03), transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(201, 168, 76, 0.02), transparent 40%),
-                var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 30px 0 20px;
+        .hero {
+            background: var(--bg-card-dark);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            padding: 24px 32px;
             margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
         }
 
-        .hero-datacenter .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+        .hero:hover {
+            border-color: var(--border-glow);
         }
 
-        .hero-datacenter .hero-content {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(0, 212, 255, 0.02), transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero .hero-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .hero-datacenter .hero-content .title h2 {
+        .hero .hero-content .title h2 {
             font-size: 1.4rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .hero-datacenter .hero-content .title h2 .highlight {
+
+        .hero .hero-content .title h2 .highlight {
             background: linear-gradient(135deg, var(--signal-blue), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero-datacenter .hero-content .title p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+
+        .hero .hero-content .title h2 i {
+            color: var(--signal-blue);
+            font-size: 1.2rem;
         }
 
-        .hero-datacenter .hero-content .stats-mini {
-            display: flex;
-            gap: 24px;
+        .hero .hero-content .title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
-        .hero-datacenter .hero-content .stats-mini .stat {
+
+        .hero .hero-content .stats-mini {
+            display: flex;
+            gap: 28px;
+        }
+
+        .hero .hero-content .stats-mini .stat {
             text-align: center;
         }
-        .hero-datacenter .hero-content .stats-mini .stat .number {
+
+        .hero .hero-content .stats-mini .stat .number {
             font-family: var(--font-tech);
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--signal-blue);
         }
-        .hero-datacenter .hero-content .stats-mini .stat .label {
+
+        .hero .hero-content .stats-mini .stat .label {
             font-size: 0.6rem;
             color: var(--text-muted);
+            display: block;
         }
 
         /* ============================================================
-                   DASHBOARD GRID
+                   GRID LAYOUT
                    ============================================================ */
-        .dashboard-grid {
+        .grid-2 {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-bottom: 24px;
         }
 
-        .dashboard-grid .full { grid-column: 1 / -1; }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
 
         /* ============================================================
                    CARDS
@@ -289,7 +479,11 @@
             overflow: hidden;
             transition: var(--transition);
         }
-        .card:hover { border-color: var(--border-glow); }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card);
+        }
 
         .card .card-header {
             padding: 14px 20px;
@@ -306,14 +500,30 @@
             align-items: center;
             gap: 8px;
         }
-        .card .card-header h3 i { color: var(--signal-blue); }
 
-        .card .card-body { padding: 16px 20px; }
+        .card .card-header h3 i {
+            color: var(--signal-blue);
+            font-size: 0.9rem;
+        }
+
+        .card .card-header .badge-header {
+            font-family: var(--font-tech);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            padding: 2px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .card .card-body {
+            padding: 16px 20px;
+        }
 
         /* ============================================================
-                   USER AUTH SECTION
+                   AUTH SECTION
                    ============================================================ */
-        .auth-section {
+        .auth-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
@@ -322,12 +532,17 @@
         .auth-box {
             background: rgba(255, 255, 255, 0.02);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px 20px;
             border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .auth-box:hover {
+            border-color: var(--border-glow);
         }
 
         .auth-box h4 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 12px;
             display: flex;
@@ -335,15 +550,21 @@
             gap: 8px;
         }
 
-        .auth-box .form-group {
-            margin-bottom: 10px;
+        .auth-box h4 i {
+            font-size: 0.9rem;
         }
+
+        .auth-box .form-group {
+            margin-bottom: 8px;
+        }
+
         .auth-box .form-group label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             display: block;
             margin-bottom: 2px;
         }
+
         .auth-box .form-group input {
             width: 100%;
             padding: 8px 12px;
@@ -352,14 +573,22 @@
             border-radius: var(--radius);
             color: var(--text-primary);
             font-size: 0.8rem;
+            font-family: var(--font-main);
             transition: var(--transition);
         }
+
         .auth-box .form-group input:focus {
             outline: none;
             border-color: var(--signal-blue);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.04);
         }
 
-        .auth-box .btn-auth {
+        .auth-box .form-group input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .btn-auth {
             width: 100%;
             padding: 10px;
             background: linear-gradient(135deg, var(--signal-blue), var(--gold));
@@ -367,76 +596,169 @@
             border: none;
             border-radius: var(--radius);
             font-family: var(--font-tech);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-bounce);
+            letter-spacing: 0.5px;
         }
-        .auth-box .btn-auth:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--signal-blue-glow); }
+
+        .btn-auth:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--signal-blue-glow);
+        }
+
+        .btn-auth:active {
+            transform: scale(0.98);
+        }
 
         /* ============================================================
-                   CHAT SECTION
+                   USER STATUS
+                   ============================================================ */
+        .user-status {
+            display: none;
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.03);
+            border-bottom: 1px solid var(--border-color);
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .user-status.active {
+            display: flex;
+        }
+
+        .user-status .name {
+            color: var(--signal-blue);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-status .name i {
+            font-size: 0.8rem;
+        }
+
+        .btn-logout {
+            background: none;
+            border: 1px solid rgba(255, 0, 68, 0.15);
+            color: var(--neon-red);
+            padding: 4px 16px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-family: var(--font-tech);
+            transition: var(--transition);
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 0, 68, 0.05);
+            border-color: rgba(255, 0, 68, 0.3);
+        }
+
+        /* ============================================================
+                   CHAT AREA
                    ============================================================ */
         .chat-area {
-            height: 250px;
+            height: 280px;
             overflow-y: auto;
             padding: 12px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: var(--radius);
             margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
+
+        .chat-area::-webkit-scrollbar { width: 4px; }
+        .chat-area::-webkit-scrollbar-thumb { background: var(--signal-blue); border-radius: 2px; }
 
         .chat-area .msg {
             padding: 8px 14px;
             border-radius: var(--radius);
-            margin-bottom: 6px;
             font-size: 0.8rem;
             max-width: 80%;
             animation: msgIn 0.3s ease;
+            line-height: 1.6;
         }
-        .chat-area .msg.user {
-            background: rgba(0, 212, 255, 0.08);
-            margin-right: auto;
+
+        .chat-area .msg.self {
+            background: rgba(0, 212, 255, 0.06);
             border-right: 2px solid var(--signal-blue);
+            align-self: flex-end;
         }
-        .chat-area .msg.bot {
-            background: rgba(201, 168, 76, 0.06);
-            margin-left: auto;
+
+        .chat-area .msg.other {
+            background: rgba(201, 168, 76, 0.04);
             border-left: 2px solid var(--gold);
+            align-self: flex-start;
             color: var(--text-secondary);
         }
+
         .chat-area .msg.system {
-            background: rgba(255, 0, 68, 0.04);
+            background: rgba(255, 255, 255, 0.02);
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             max-width: 100%;
+            border: none;
         }
 
-        @keyframes msgIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .chat-area .msg .sender {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
+        .chat-area .msg .sender .time {
+            font-weight: 400;
+            font-size: 0.5rem;
+        }
+
+        /* ============================================================
+                   CHAT INPUT
+                   ============================================================ */
         .chat-input {
             display: flex;
             gap: 10px;
         }
+
         .chat-input input {
             flex: 1;
-            padding: 10px 14px;
+            padding: 10px 16px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
             color: var(--text-primary);
             font-size: 0.8rem;
+            font-family: var(--font-main);
+            transition: var(--transition);
         }
+
         .chat-input input:focus {
             outline: none;
             border-color: var(--signal-blue);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.04);
         }
-        .chat-input button {
-            padding: 10px 20px;
+
+        .chat-input input:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .chat-input input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .btn-send {
+            padding: 10px 24px;
             background: linear-gradient(135deg, var(--signal-blue), var(--gold));
             color: var(--bg-primary);
             border: none;
@@ -445,90 +767,171 @@
             font-size: 0.7rem;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-bounce);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
         }
-        .chat-input button:hover { transform: scale(1.02); }
+
+        .btn-send:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--signal-blue-glow);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
 
         /* ============================================================
-                   DATA COLLECTION TABLE
+                   DATA TABLE
                    ============================================================ */
+        .data-table-wrapper {
+            overflow-x: auto;
+        }
+
         .data-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.75rem;
+            min-width: 600px;
         }
+
         .data-table th {
             text-align: right;
-            padding: 8px 12px;
+            padding: 10px 14px;
             color: var(--text-muted);
             border-bottom: 1px solid var(--border-color);
             font-weight: 600;
+            font-family: var(--font-tech);
+            font-size: 0.6rem;
+            letter-spacing: 0.5px;
         }
+
         .data-table td {
-            padding: 8px 12px;
+            padding: 10px 14px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
-        .data-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
         .data-table .status-badge {
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 12px;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-family: var(--font-tech);
         }
-        .data-table .status-badge.processed { background: rgba(0, 255, 136, 0.1); color: var(--neon-green); }
-        .data-table .status-badge.pending { background: rgba(255, 136, 0, 0.1); color: var(--neon-orange); }
-        .data-table .status-badge.error { background: rgba(255, 0, 68, 0.1); color: var(--neon-red); }
+
+        .data-table .status-badge.processed {
+            background: rgba(0, 255, 136, 0.06);
+            color: var(--neon-green);
+        }
+
+        .data-table .status-badge.pending {
+            background: rgba(255, 136, 0, 0.06);
+            color: var(--neon-orange);
+        }
+
+        .data-table .status-badge.error {
+            background: rgba(255, 0, 68, 0.06);
+            color: var(--neon-red);
+        }
 
         /* ============================================================
-                   SOURCE CONNECTIONS
+                   SOURCE GRID
                    ============================================================ */
         .source-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
         }
+
         .source-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 12px;
+            padding: 8px 14px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: var(--radius);
             border: 1px solid var(--border-color);
             font-size: 0.75rem;
+            transition: var(--transition);
         }
-        .source-item .icon { font-size: 0.9rem; color: var(--signal-blue); }
-        .source-item .name { color: var(--text-secondary); }
-        .source-item .status {
+
+        .source-item:hover {
+            border-color: var(--border-glow);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .source-item .icon {
+            font-size: 0.9rem;
+            color: var(--signal-blue);
+        }
+
+        .source-item .name {
+            color: var(--text-secondary);
+        }
+
+        .source-item .status-dot {
             margin-right: auto;
             width: 6px;
             height: 6px;
             border-radius: 50%;
         }
-        .source-item .status.online { background: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
-        .source-item .status.offline { background: var(--neon-red); }
-        .source-item .status.warning { background: var(--neon-orange); }
 
-        /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
-        @media (max-width: 1024px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .auth-section { grid-template-columns: 1fr; }
-            .source-grid { grid-template-columns: 1fr; }
+        .source-item .status-dot.online {
+            background: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            animation: pulse 2s infinite;
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(100%);
-                width: 280px;
-            }
-            .sidebar.open { transform: translateX(0); }
-            .main-content { margin-right: 0; padding: 16px; }
-            .hero-datacenter .hero-content { flex-direction: column; align-items: flex-start; }
-            .hero-datacenter .hero-content .stats-mini { width: 100%; justify-content: space-around; }
-            .header .status-bar .item { display: none; }
+        .source-item .status-dot.warning {
+            background: var(--neon-orange);
+        }
+
+        .source-item .status-dot.offline {
+            background: var(--neon-red);
+        }
+
+        /* ============================================================
+                   STATS CARDS
+                   ============================================================ */
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 18px 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-card .number {
+            font-family: var(--font-tech);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--signal-blue);
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .stat-card .icon {
+            font-size: 1.2rem;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
         }
 
         /* ============================================================
@@ -543,9 +946,10 @@
             flex-direction: column;
             gap: 8px;
         }
+
         .toast {
             background: var(--bg-card);
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: var(--radius);
             border-right: 4px solid var(--signal-blue);
             box-shadow: var(--shadow-card);
@@ -557,23 +961,94 @@
             border: 1px solid var(--border-color);
             font-size: 0.85rem;
         }
+
         .toast.success { border-right-color: var(--neon-green); }
         .toast.error { border-right-color: var(--neon-red); }
         .toast.warning { border-right-color: var(--neon-orange); }
+
         .toast i { font-size: 1rem; }
         .toast.success i { color: var(--neon-green); }
         .toast.error i { color: var(--neon-red); }
         .toast.warning i { color: var(--neon-orange); }
+
         .toast .toast-close {
             margin-right: auto;
             background: none;
             border: none;
-            cursor: pointer;
             color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr 1fr; }
+            .source-grid { grid-template-columns: 1fr; }
+            .auth-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(100%);
+                width: 280px;
+            }
+            .sidebar.open { transform: translateX(0); }
+
+            .main-content {
+                margin-right: 0;
+                padding: 16px;
+            }
+
+            .menu-toggle { display: block; }
+
+            .header .status-bar .item { display: none; }
+            .header .status-bar .item:first-child { display: flex; }
+
+            .hero .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero .hero-content .stats-mini {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .grid-3 { grid-template-columns: 1fr; }
+            .chat-area { height: 200px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 16px; }
+            .hero .hero-content .title h2 { font-size: 1.1rem; }
+            .hero .hero-content .stats-mini { gap: 12px; }
+            .hero .hero-content .stats-mini .stat .number { font-size: 1rem; }
+
+            .card .card-header h3 { font-size: 0.8rem; }
+            .card .card-body { padding: 12px 14px; }
+
+            .auth-box { padding: 14px; }
+            .chat-input { flex-direction: column; }
+            .btn-send { width: 100%; justify-content: center; }
+
+            .toast { min-width: unset; width: calc(100vw - 40px); }
+        }
+
+        /* ============================================================
+                   SCROLLBAR FOR CHAT
+                   ============================================================ */
+        .chat-area::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-area::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2px;
+        }
+        .chat-area::-webkit-scrollbar-thumb {
+            background: var(--signal-blue);
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -582,19 +1057,37 @@
     <!-- ============================================================
     HEADER
     ============================================================ -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="logo">
-            <div class="icon"><i class="fas fa-satellite-dish"></i></div>
+            <div class="icon">
+                <i class="fas fa-satellite-dish"></i>
+            </div>
             <div>
-                <h1>PARSI SPACE DC</h1>
+                <h1>PARSI SPACE</h1>
                 <span>🛰️ DATA CENTER</span>
             </div>
         </div>
+
         <div class="status-bar">
-            <div class="item"><span class="dot online"></span> سرور فعال</div>
-            <div class="item"><i class="fas fa-database"></i> ۲.۴TB</div>
-            <div class="item"><i class="fas fa-satellite"></i> ۱۲ متصل</div>
-            <div class="item"><i class="fas fa-users"></i> ۱٫۲K</div>
+            <div class="item">
+                <span class="dot online"></span>
+                ONLINE
+            </div>
+            <div class="item">
+                <i class="fas fa-database"></i>
+                ۲.۴TB
+            </div>
+            <div class="item">
+                <i class="fas fa-satellite"></i>
+                ۱۲
+            </div>
+            <div class="item">
+                <i class="fas fa-users"></i>
+                ۱.۲K
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="منو">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -602,227 +1095,304 @@
     SIDEBAR
     ============================================================ -->
     <aside class="sidebar" id="sidebar">
-        <div class="nav-item active"><i class="fas fa-tachometer-alt"></i> پیشخوان <span class="badge">Live</span></div>
-        <div class="nav-item"><i class="fas fa-database"></i> داده‌ها <span class="badge">۱٫۲۴۸</span></div>
-        <div class="nav-item"><i class="fas fa-satellite"></i> ماهواره‌ها <span class="badge success">۱۲</span></div>
-        <div class="nav-item"><i class="fas fa-radio"></i> سیگنال‌ها <span class="badge">۸۴</span></div>
-        <div class="nav-item"><i class="fas fa-shield-alt"></i> امنیت <span class="badge success">فعال</span></div>
-        <div class="nav-item"><i class="fas fa-users"></i> کاربران <span class="badge">۱٫۲K</span></div>
-        <div class="nav-item"><i class="fas fa-globe"></i> منابع <span class="badge">۳۲</span></div>
-        <div class="nav-item"><i class="fas fa-history"></i> گزارشات <span class="badge danger">۳</span></div>
-        <div class="nav-item"><i class="fas fa-cog"></i> تنظیمات</div>
+        <div class="section-title">📡 کنترل</div>
+        <div class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i> پیشخوان
+            <span class="badge">Live</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-database"></i> داده‌ها
+            <span class="badge">۱٫۲۴۸</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-satellite"></i> ماهواره‌ها
+            <span class="badge success">۱۲</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-radio"></i> سیگنال‌ها
+            <span class="badge">۸۴</span>
+        </div>
+
+        <div class="section-title">🔒 امنیت</div>
+        <div class="nav-item">
+            <i class="fas fa-shield-alt"></i> امنیت
+            <span class="badge success">فعال</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-lock"></i> رمزنگاری
+            <span class="badge success">AES-256</span>
+        </div>
+
+        <div class="section-title">🌐 ارتباطات</div>
+        <div class="nav-item">
+            <i class="fas fa-globe"></i> منابع
+            <span class="badge">۳۲</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i> کاربران
+            <span class="badge">۱٫۲K</span>
+        </div>
+
+        <div class="section-title">⚙️ سیستم</div>
+        <div class="nav-item">
+            <i class="fas fa-history"></i> گزارشات
+            <span class="badge danger">۳</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-cog"></i> تنظیمات
+        </div>
     </aside>
 
     <!-- ============================================================
     MAIN CONTENT
     ============================================================ -->
-    <main class="main-content">
+    <main class="main-content" id="mainContent">
 
-        <!-- Hero -->
-        <div class="hero-datacenter">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="title">
-                        <h2>🛰️ <span class="highlight">PARSI Space</span> Data Center</h2>
-                        <p>مرکز داده جامع فضایی - جمع‌آوری، پردازش و ذخیره‌سازی داده‌های فضایی و ارتباطی</p>
+        <!-- ============================================================
+        HERO
+        ============================================================ -->
+        <section class="hero animate-in">
+            <div class="hero-content">
+                <div class="title">
+                    <h2>
+                        <i class="fas fa-satellite-dish"></i>
+                        <span class="highlight">PARSI Space</span> Data Center
+                    </h2>
+                    <p>🛰️ مرکز داده فضایی پارسی - جمع‌آوری و پردازش داده‌های فضایی</p>
+                </div>
+                <div class="stats-mini">
+                    <div class="stat">
+                        <div class="number">۱٫۲۴۸</div>
+                        <div class="label">داده پردازش‌شده</div>
                     </div>
-                    <div class="stats-mini">
-                        <div class="stat"><div class="number">۱٫۲۴۸</div><div class="label">داده پردازش‌شده</div></div>
-                        <div class="stat"><div class="number">۳۲</div><div class="label">منبع متصل</div></div>
-                        <div class="stat"><div class="number">۹۹٫۹%</div><div class="label">امنیت</div></div>
+                    <div class="stat">
+                        <div class="number">۳۲</div>
+                        <div class="label">منبع متصل</div>
+                    </div>
+                    <div class="stat">
+                        <div class="number">۹۹٫۹%</div>
+                        <div class="label">پایداری</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- ============================================================
         AUTH & CHAT SECTION
         ============================================================ -->
-        <div class="dashboard-grid">
-            <!-- Login / Register -->
-            <div class="card">
+        <div class="grid-2">
+
+            <!-- Auth Section -->
+            <div class="card animate-in">
                 <div class="card-header">
-                    <h3><i class="fas fa-user-astronaut"></i> ورود / ثبت‌نام کاربر</h3>
-                    <span style="font-size:0.65rem; color:var(--text-muted); font-family:var(--font-tech);">● امن</span>
+                    <h3><i class="fas fa-user-astronaut"></i> ورود / ثبت‌نام</h3>
+                    <span class="badge-header">🔒 امن</span>
                 </div>
                 <div class="card-body">
-                    <div class="auth-section">
+                    <div class="auth-grid">
+                        <!-- Login -->
                         <div class="auth-box">
                             <h4><i class="fas fa-sign-in-alt" style="color:var(--signal-blue);"></i> ورود</h4>
                             <form id="loginForm">
-                                <div class="form-group"><label>نام کاربری</label><input type="text" id="loginUser" placeholder="نام کاربری"></div>
-                                <div class="form-group"><label>رمز عبور</label><input type="password" id="loginPass" placeholder="رمز عبور"></div>
-                                <button type="submit" class="btn-auth"><i class="fas fa-sign-in-alt"></i> ورود</button>
+                                <div class="form-group">
+                                    <label>نام کاربری</label>
+                                    <input type="text" id="loginUser" placeholder="نام کاربری">
+                                </div>
+                                <div class="form-group">
+                                    <label>رمز عبور</label>
+                                    <input type="password" id="loginPass" placeholder="رمز عبور">
+                                </div>
+                                <button type="submit" class="btn-auth">
+                                    <i class="fas fa-sign-in-alt"></i> ورود
+                                </button>
                             </form>
                         </div>
+
+                        <!-- Register -->
                         <div class="auth-box">
                             <h4><i class="fas fa-user-plus" style="color:var(--gold);"></i> ثبت‌نام</h4>
                             <form id="registerForm">
-                                <div class="form-group"><label>نام کامل</label><input type="text" id="regName" placeholder="نام کامل"></div>
-                                <div class="form-group"><label>نام کاربری</label><input type="text" id="regUser" placeholder="نام کاربری"></div>
-                                <div class="form-group"><label>رمز عبور</label><input type="password" id="regPass" placeholder="رمز عبور"></div>
-                                <button type="submit" class="btn-auth"><i class="fas fa-user-plus"></i> ثبت‌نام</button>
+                                <div class="form-group">
+                                    <label>نام کامل</label>
+                                    <input type="text" id="regName" placeholder="نام کامل">
+                                </div>
+                                <div class="form-group">
+                                    <label>نام کاربری</label>
+                                    <input type="text" id="regUser" placeholder="نام کاربری">
+                                </div>
+                                <div class="form-group">
+                                    <label>رمز عبور</label>
+                                    <input type="password" id="regPass" placeholder="رمز عبور">
+                                </div>
+                                <button type="submit" class="btn-auth">
+                                    <i class="fas fa-user-plus"></i> ثبت‌نام
+                                </button>
                             </form>
                         </div>
                     </div>
-                    <div id="userStatus" style="margin-top:10px; font-size:0.8rem; color:var(--neon-green); display:none;">
-                        <i class="fas fa-check-circle"></i> <span id="userDisplay">کاربر</span> متصل شد
+
+                    <!-- User Status -->
+                    <div class="user-status" id="userStatus">
+                        <span class="name">
+                            <i class="fas fa-user-astronaut"></i>
+                            <span id="displayName">کاربر</span>
+                        </span>
+                        <button class="btn-logout" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> خروج
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Chat -->
-            <div class="card">
+            <!-- Chat Section -->
+            <div class="card animate-in">
                 <div class="card-header">
                     <h3><i class="fas fa-comment-dots"></i> ارتباط با سرور</h3>
-                    <span style="font-size:0.6rem; color:var(--neon-green); font-family:var(--font-tech);"><i class="fas fa-circle"></i> کانال امن</span>
+                    <span class="badge-header">
+                        <i class="fas fa-circle" style="color:var(--neon-green); font-size:0.5rem;"></i>
+                        کانال امن
+                    </span>
                 </div>
                 <div class="card-body">
                     <div class="chat-area" id="chatArea">
-                        <div class="msg system">🛰️ به مرکز داده فضایی پارسی خوش آمدید</div>
-                        <div class="msg bot">سلام! من دستیار هوشمند مرکز داده هستم. برای ارتباط با سرور، پیام خود را ارسال کنید.</div>
+                        <div class="msg system">
+                            🛰️ به PARSI Space Data Center خوش آمدید
+                        </div>
+                        <div class="msg other">
+                            سلام! من دستیار هوشمند مرکز داده هستم. برای ارتباط با سرور، پیام خود را ارسال کنید.
+                        </div>
                     </div>
+
                     <div class="chat-input">
-                        <input type="text" id="chatInput" placeholder="پیام خود را وارد کنید..." disabled>
-                        <button id="chatSendBtn" disabled><i class="fas fa-paper-plane"></i> ارسال</button>
+                        <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." disabled>
+                        <button class="btn-send" id="sendBtn" disabled>
+                            <i class="fas fa-paper-plane"></i> ارسال
+                        </button>
                     </div>
-                    <div style="margin-top:8px; font-size:0.6rem; color:var(--text-muted); font-family:var(--font-tech);">
-                        <i class="fas fa-lock" style="color:var(--neon-green);"></i> رمزنگاری AES-256 | کانال امن
+
+                    <div style="margin-top:8px; display:flex; justify-content:space-between; font-size:0.55rem; color:var(--text-muted); font-family:var(--font-tech);">
+                        <span><i class="fas fa-lock" style="color:var(--neon-green);"></i> رمزنگاری AES-256</span>
+                        <span id="chatStatus">⏳ در انتظار اتصال...</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ============================================================
-        DATA COLLECTION TABLE
+        STATS CARDS
         ============================================================ -->
-        <div class="card" style="margin-bottom:24px;">
+        <div class="grid-3">
+            <div class="stat-card animate-in">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span class="number" id="totalData">۱٫۲۴۸</span>
+                <span class="label">کل داده‌ها</span>
+            </div>
+            <div class="stat-card animate-in">
+                <span class="icon"><i class="fas fa-check-circle" style="color:var(--neon-green);"></i></span>
+                <span class="number" id="processedData">۱٫۱۰۲</span>
+                <span class="label">پردازش‌شده</span>
+            </div>
+            <div class="stat-card animate-in">
+                <span class="icon"><i class="fas fa-clock" style="color:var(--neon-orange);"></i></span>
+                <span class="number" id="pendingData">۱۲۶</span>
+                <span class="label">در انتظار</span>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DATA TABLE
+        ============================================================ -->
+        <div class="card animate-in" style="margin-bottom:24px;">
             <div class="card-header">
                 <h3><i class="fas fa-table"></i> داده‌های جمع‌آوری‌شده</h3>
-                <div style="display:flex; gap:12px; font-size:0.65rem; color:var(--text-muted);">
-                    <span><span style="color:var(--neon-green);">●</span> پردازش‌شده</span>
-                    <span><span style="color:var(--neon-orange);">●</span> در انتظار</span>
-                    <span><span style="color:var(--neon-red);">●</span> خطا</span>
-                </div>
+                <span class="badge-header">
+                    <span style="color:var(--neon-green);">●</span> پردازش‌شده
+                    <span style="color:var(--neon-orange); margin-right:8px;">●</span> در انتظار
+                    <span style="color:var(--neon-red); margin-right:8px;">●</span> خطا
+                </span>
             </div>
-            <div class="card-body" style="overflow-x:auto;">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>منبع</th>
-                            <th>نوع داده</th>
-                            <th>موقعیت</th>
-                            <th>زمان دریافت</th>
-                            <th>وضعیت</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataTableBody">
-                        <tr>
-                            <td><i class="fas fa-satellite" style="color:var(--signal-blue);"></i> PARSI-SAT-1</td>
-                            <td>سیگنال رادیویی</td>
-                            <td>مدار LEO</td>
-                            <td>۱۴۰۴/۰۱/۱۵ - ۱۴:۳۲</td>
-                            <td><span class="status-badge processed">پردازش‌شده</span></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-globe" style="color:var(--gold);"></i> زمینی - تهران</td>
-                            <td>داده اینترنت</td>
-                            <td>۳۵°۴۱′N ۵۱°۲۳′E</td>
-                            <td>۱۴۰۴/۰۱/۱۵ - ۱۴:۲۸</td>
-                            <td><span class="status-badge processed">پردازش‌شده</span></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-radio" style="color:var(--neon-orange);"></i> سیگنال ناشناس</td>
-                            <td>امواج ناشناس</td>
-                            <td>مبدأ نامشخص</td>
-                            <td>۱۴۰۴/۰۱/۱۵ - ۱۴:۱۵</td>
-                            <td><span class="status-badge pending">در انتظار</span></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-satellite" style="color:var(--neon-purple);"></i> ماهواره خارجی</td>
-                            <td>داده رمزنگاری‌شده</td>
-                            <td>مدار GEO</td>
-                            <td>۱۴۰۴/۰۱/۱۵ - ۱۳:۵۰</td>
-                            <td><span class="status-badge pending">در انتظار</span></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-microchip" style="color:var(--signal-blue);"></i> ربات جمع‌آوری</td>
-                            <td>داده سیستمی</td>
-                            <td>شبکه داخلی</td>
-                            <td>۱۴۰۴/۰۱/۱۵ - ۱۳:۲۰</td>
-                            <td><span class="status-badge error">خطا</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="data-table-wrapper">
+                    <table class="data-table" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>منبع</th>
+                                <th>نوع داده</th>
+                                <th>موقعیت</th>
+                                <th>زمان دریافت</th>
+                                <th>وضعیت</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- Dynamic rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- ============================================================
-        SOURCE CONNECTIONS
+        SOURCE CONNECTIONS & STORAGE
         ============================================================ -->
-        <div class="dashboard-grid">
-            <div class="card">
+        <div class="grid-2">
+
+            <!-- Source Connections -->
+            <div class="card animate-in">
                 <div class="card-header">
                     <h3><i class="fas fa-link"></i> منابع متصل</h3>
-                    <span style="font-size:0.6rem; color:var(--text-muted); font-family:var(--font-tech);">۳۲ منبع</span>
+                    <span class="badge-header">۳۲ منبع</span>
                 </div>
                 <div class="card-body">
-                    <div class="source-grid">
-                        <div class="source-item"><span class="icon"><i class="fas fa-satellite"></i></span><span class="name">ماهواره‌های داخلی</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-globe"></i></span><span class="name">ایستگاه‌های زمینی</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-radio"></i></span><span class="name">سیگنال‌های رادیویی</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-tv"></i></span><span class="name">ارتباطات تلویزیونی</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-wifi"></i></span><span class="name">شبکه‌های اینترنتی</span><span class="status warning"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-phone"></i></span><span class="name">مخابرات</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-microchip"></i></span><span class="name">دستگاه‌های هوشمند</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-robot"></i></span><span class="name">ربات‌های جمع‌آوری</span><span class="status warning"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-globe-asia"></i></span><span class="name">سازمان‌های فضایی</span><span class="status online"></span></div>
-                        <div class="source-item"><span class="icon"><i class="fas fa-bolt"></i></span><span class="name">امواج الکترونیکی</span><span class="status online"></span></div>
+                    <div class="source-grid" id="sourceGrid">
+                        <!-- Dynamic sources will be added here -->
                     </div>
                 </div>
             </div>
 
-            <!-- Data Processing Stats -->
-            <div class="card">
+            <!-- Storage Info -->
+            <div class="card animate-in">
                 <div class="card-header">
-                    <h3><i class="fas fa-chart-pie"></i> آمار پردازش</h3>
-                    <span style="font-size:0.6rem; color:var(--text-muted); font-family:var(--font-tech);">لحظه‌ای</span>
+                    <h3><i class="fas fa-hdd"></i> فضای ذخیره‌سازی</h3>
+                    <span class="badge-header">لحظه‌ای</span>
                 </div>
                 <div class="card-body">
                     <div style="display:grid; gap:12px;">
-                        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
-                            <span style="color:var(--text-muted);">کل داده‌ها</span>
-                            <span style="font-family:var(--font-tech); color:var(--signal-blue);">۱٫۲۴۸</span>
+                        <div style="display:flex; justify-content:space-between; padding:10px 14px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
+                            <span style="color:var(--text-muted);">مجموع فضا</span>
+                            <span style="font-family:var(--font-tech); color:var(--text-primary);">۴ TB</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
-                            <span style="color:var(--text-muted);">پردازش‌شده</span>
-                            <span style="font-family:var(--font-tech); color:var(--neon-green);">۱٫۱۰۲</span>
+                        <div style="display:flex; justify-content:space-between; padding:10px 14px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
+                            <span style="color:var(--text-muted);">استفاده‌شده</span>
+                            <span style="font-family:var(--font-tech); color:var(--signal-blue);">۲.۴ TB</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
-                            <span style="color:var(--text-muted);">در انتظار</span>
-                            <span style="font-family:var(--font-tech); color:var(--neon-orange);">۱۲۶</span>
+                        <div style="display:flex; justify-content:space-between; padding:10px 14px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
+                            <span style="color:var(--text-muted);">فضای خالی</span>
+                            <span style="font-family:var(--font-tech); color:var(--neon-green);">۱.۶ TB</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
-                            <span style="color:var(--text-muted);">خطا</span>
-                            <span style="font-family:var(--font-tech); color:var(--neon-red);">۲۰</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:var(--radius);">
-                            <span style="color:var(--text-muted);">فضای ذخیره‌سازی</span>
-                            <span style="font-family:var(--font-tech); color:var(--gold);">۲.۴TB / ۴TB</span>
-                        </div>
-                        <div style="width:100%; height:4px; background:rgba(255,255,255,0.04); border-radius:2px; overflow:hidden; margin-top:4px;">
-                            <div style="width:60%; height:100%; background:linear-gradient(to right, var(--signal-blue), var(--gold)); border-radius:2px;"></div>
+                        <div style="margin-top:4px;">
+                            <div style="width:100%; height:6px; background:rgba(255,255,255,0.04); border-radius:3px; overflow:hidden;">
+                                <div style="width:60%; height:100%; background:linear-gradient(to right, var(--signal-blue), var(--gold)); border-radius:3px; transition:var(--transition-slow);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.55rem; color:var(--text-muted); margin-top:4px;">
+                                <span>۰%</span>
+                                <span>۶۰%</span>
+                                <span>۱۰۰%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.65rem; border-top:1px solid var(--border-color); margin-top:8px; font-family:var(--font-tech);">
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
+        <div style="text-align:center; padding:20px 0; color:var(--text-muted); font-size:0.6rem; border-top:1px solid var(--border-color); margin-top:8px; font-family:var(--font-tech); letter-spacing:0.5px;">
             🛰️ PARSI Space Data Center | مرکز داده فضایی پارسی
             <br>
-            <span style="font-size:0.55rem; color:var(--text-muted);">جمع‌آوری و پردازش داده‌های فضایی - ارتباطات امن - تحقیقات پیشرفته</span>
+            <span style="font-size:0.5rem; opacity:0.5;">
+                جمع‌آوری و پردازش داده‌های فضایی - ارتباطات امن - تحقیقات پیشرفته
+            </span>
         </div>
 
     </main>
@@ -837,157 +1407,418 @@
     ============================================================ -->
     <script>
         // ============================================================
-        // USER AUTH SYSTEM
+        // DATA LAYER - localStorage
         // ============================================================
-        let currentUser = null;
-
-        // Register
-        document.getElementById('registerForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('regName').value.trim();
-            const user = document.getElementById('regUser').value.trim();
-            const pass = document.getElementById('regPass').value;
-
-            if (!name || !user || !pass) {
-                showToast('لطفاً همه فیلدها را پر کنید', 'warning');
-                return;
+        const DataStore = {
+            // Users
+            getUsers() {
+                return JSON.parse(localStorage.getItem('psdc_users') || '[]');
+            },
+            saveUsers(users) {
+                localStorage.setItem('psdc_users', JSON.stringify(users));
+            },
+            // Current User
+            getCurrentUser() {
+                return JSON.parse(localStorage.getItem('psdc_current_user') || 'null');
+            },
+            setCurrentUser(user) {
+                localStorage.setItem('psdc_current_user', JSON.stringify(user));
+            },
+            clearCurrentUser() {
+                localStorage.removeItem('psdc_current_user');
+            },
+            // Messages
+            getMessages() {
+                return JSON.parse(localStorage.getItem('psdc_messages') || '[]');
+            },
+            saveMessages(messages) {
+                localStorage.setItem('psdc_messages', JSON.stringify(messages));
+            },
+            addMessage(user, message) {
+                const messages = this.getMessages();
+                messages.push({
+                    user: user,
+                    message: message,
+                    time: Date.now(),
+                    id: Date.now() + Math.random()
+                });
+                this.saveMessages(messages);
+                return messages;
+            },
+            // Collected Data
+            getCollectedData() {
+                return JSON.parse(localStorage.getItem('psdc_collected_data') || '[]');
+            },
+            saveCollectedData(data) {
+                localStorage.setItem('psdc_collected_data', JSON.stringify(data));
+            },
+            addCollectedData(item) {
+                const data = this.getCollectedData();
+                data.push({
+                    ...item,
+                    time: Date.now(),
+                    id: Date.now() + Math.random()
+                });
+                this.saveCollectedData(data);
+                return data;
             }
-
-            const users = JSON.parse(localStorage.getItem('psdc_users') || '[]');
-            if (users.find(u => u.username === user)) {
-                showToast('این نام کاربری قبلاً ثبت شده است', 'error');
-                return;
-            }
-
-            users.push({ fullname: name, username: user, password: pass });
-            localStorage.setItem('psdc_users', JSON.stringify(users));
-            showToast('✅ ثبت‌نام با موفقیت انجام شد!', 'success');
-            this.reset();
-        });
-
-        // Login
-        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('loginUser').value.trim();
-            const pass = document.getElementById('loginPass').value;
-
-            if (!user || !pass) {
-                showToast('لطفاً نام کاربری و رمز عبور را وارد کنید', 'warning');
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem('psdc_users') || '[]');
-            const found = users.find(u => u.username === user && u.password === pass);
-
-            if (found) {
-                currentUser = found;
-                document.getElementById('userStatus').style.display = 'block';
-                document.getElementById('userDisplay').textContent = found.fullname;
-                document.getElementById('chatInput').disabled = false;
-                document.getElementById('chatSendBtn').disabled = false;
-                showToast(`🛰️ ${found.fullname} عزیز، به مرکز داده خوش آمدید!`, 'success');
-                this.reset();
-            } else {
-                showToast('نام کاربری یا رمز عبور اشتباه است', 'error');
-            }
-        });
-
-        // ============================================================
-        // CHAT SYSTEM
-        // ============================================================
-        const chatArea = document.getElementById('chatArea');
-        const chatInput = document.getElementById('chatInput');
-        const chatSend = document.getElementById('chatSendBtn');
-
-        function addChatMessage(text, type = 'user') {
-            const div = document.createElement('div');
-            div.className = `msg ${type}`;
-            div.textContent = text;
-            chatArea.appendChild(div);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
-
-        function sendToServer(message) {
-            // Simulate server response
-            const responses = [
-                '📡 داده شما دریافت و در سرور ذخیره شد.',
-                '🛰️ سیگنال شما پردازش شد. نتیجه به ماهواره ارسال شد.',
-                '🔭 داده شما در حال تحلیل توسط هوش مصنوعی مرکز داده است.',
-                '🌍 اطلاعات شما با سایر منابع تطابق داده شد.',
-                '📊 داده شما به روزرسانی شد و در دیتابیس ذخیره گردید.',
-                '🚀 ارتباط با ماهواره برقرار شد. داده شما ارسال شد.',
-            ];
-
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            setTimeout(() => {
-                addChatMessage(`🤖 ${randomResponse}`, 'bot');
-                // Simulate data collection
-                addToDataTable();
-            }, 1000 + Math.random() * 1500);
-        }
-
-        chatSend?.addEventListener('click', function() {
-            const msg = chatInput.value.trim();
-            if (!msg) return;
-            if (!currentUser) {
-                showToast('لطفاً ابتدا وارد حساب کاربری خود شوید', 'warning');
-                return;
-            }
-            addChatMessage(`👨‍🚀 ${currentUser.fullname}: ${msg}`, 'user');
-            chatInput.value = '';
-            sendToServer(msg);
-        });
-
-        chatInput?.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') chatSend.click();
-        });
+        };
 
         // ============================================================
-        // DATA TABLE - SIMULATE COLLECTION
+        // SOURCES DATA
         // ============================================================
-        function addToDataTable() {
-            const tbody = document.getElementById('dataTableBody');
-            const sources = [
-                { name: 'PARSI-SAT-1', icon: 'fa-satellite', color: 'var(--signal-blue)' },
-                { name: 'زمینی - تهران', icon: 'fa-globe', color: 'var(--gold)' },
-                { name: 'سیگنال رادیویی', icon: 'fa-radio', color: 'var(--neon-orange)' },
-                { name: 'ربات جمع‌آوری', icon: 'fa-robot', color: 'var(--neon-purple)' },
-                { name: 'ماهواره خارجی', icon: 'fa-satellite', color: 'var(--neon-purple)' },
-                { name: 'شبکه اینترنت', icon: 'fa-wifi', color: 'var(--signal-blue)' },
-            ];
-            const types = ['داده رمزنگاری‌شده', 'سیگنال رادیویی', 'داده اینترنت', 'امواج الکترونیکی', 'داده سیستمی'];
-            const statuses = ['processed', 'pending', 'error'];
-            const statusLabels = { processed: 'پردازش‌شده', pending: 'در انتظار', error: 'خطا' };
-            const colors = { processed: 'var(--neon-green)', pending: 'var(--neon-orange)', error: 'var(--neon-red)' };
+        const SOURCES = [
+            { name: 'PARSI-SAT-1', icon: 'fa-satellite', color: '#00d4ff' },
+            { name: 'PARSI-SAT-2', icon: 'fa-satellite', color: '#00d4ff' },
+            { name: 'ایستگاه زمینی - تهران', icon: 'fa-globe', color: '#c9a84c' },
+            { name: 'ایستگاه زمینی - شیراز', icon: 'fa-globe', color: '#c9a84c' },
+            { name: 'سیگنال رادیویی', icon: 'fa-radio', color: '#ff8800' },
+            { name: 'شبکه اینترنت', icon: 'fa-wifi', color: '#00d4ff' },
+            { name: 'ارتباطات مخابراتی', icon: 'fa-phone', color: '#8800ff' },
+            { name: 'دستگاه‌های هوشمند', icon: 'fa-microchip', color: '#00ff88' },
+            { name: 'ربات جمع‌آوری', icon: 'fa-robot', color: '#8800ff' },
+            { name: 'ماهواره خارجی', icon: 'fa-satellite', color: '#ff0044' },
+            { name: 'امواج الکترونیکی', icon: 'fa-bolt', color: '#ff8800' },
+            { name: 'سازمان‌های فضایی', icon: 'fa-globe-asia', color: '#c9a84c' },
+        ];
 
-            const source = sources[Math.floor(Math.random() * sources.length)];
-            const type = types[Math.floor(Math.random() * types.length)];
-            const status = statuses[Math.floor(Math.random() * statuses.length)];
-            const time = new Date().toLocaleString('fa-IR');
+        const DATA_TYPES = [
+            'سیگنال رادیویی', 'داده رمزنگاری‌شده', 'داده اینترنت',
+            'امواج الکترونیکی', 'داده سیستمی', 'داده تصویری',
+            'سیگنال ماهواره‌ای', 'داده مخابراتی', 'داده تحقیقاتی'
+        ];
 
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                        <td><i class="fas ${source.icon}" style="color:${source.color};"></i> ${source.name}</td>
-                        <td>${type}</td>
-                        <td>${Math.floor(Math.random() * 90 + 10)}°${['N','S'][Math.floor(Math.random()*2)]} ${Math.floor(Math.random() * 180 + 1)}°${['E','W'][Math.floor(Math.random()*2)]}</td>
-                        <td>${time}</td>
-                        <td><span class="status-badge ${status}" style="color:${colors[status]}; border-color:${colors[status]}20;">${statusLabels[status]}</span></td>
-                    `;
-            tbody.prepend(row);
+        const STATUSES = [
+            { key: 'processed', label: 'پردازش‌شده', color: '#00ff88' },
+            { key: 'pending', label: 'در انتظار', color: '#ff8800' },
+            { key: 'error', label: 'خطا', color: '#ff0044' }
+        ];
 
-            // Keep only 10 rows
-            while (tbody.children.length > 10) {
-                tbody.removeChild(tbody.lastChild);
+        // ============================================================
+        // CHAT ENGINE
+        // ============================================================
+        const ChatEngine = {
+            currentUser: null,
+            messages: [],
+
+            init() {
+                this.currentUser = DataStore.getCurrentUser();
+                this.messages = DataStore.getMessages();
+                this.renderUI();
+                this.renderMessages();
+                this.renderDataTable();
+                this.renderSources();
+                this.bindEvents();
+                this.updateStats();
+                this.startPolling();
+
+                if (this.currentUser) {
+                    this.enableChat(true);
+                    document.getElementById('chatStatus').textContent = '✅ متصل به سرور';
+                }
+
+                // Console branding
+                this.consoleBrand();
+            },
+
+            startPolling() {
+                // Check for new messages every 2 seconds
+                setInterval(() => {
+                    const newMessages = DataStore.getMessages();
+                    if (newMessages.length !== this.messages.length) {
+                        this.messages = newMessages;
+                        this.renderMessages();
+                    }
+                }, 2000);
+            },
+
+            renderUI() {
+                const userStatus = document.getElementById('userStatus');
+                const displayName = document.getElementById('displayName');
+
+                if (this.currentUser) {
+                    userStatus.classList.add('active');
+                    displayName.textContent = this.currentUser.fullname || this.currentUser.username;
+                } else {
+                    userStatus.classList.remove('active');
+                }
+            },
+
+            renderMessages() {
+                const area = document.getElementById('chatArea');
+                const messages = DataStore.getMessages();
+
+                if (messages.length === 0) {
+                    area.innerHTML = `
+                                <div class="msg system">🛰️ به PARSI Space Data Center خوش آمدید</div>
+                                <div class="msg other">سلام! من دستیار هوشمند مرکز داده هستم. برای ارتباط با سرور، پیام خود را ارسال کنید.</div>
+                            `;
+                    return;
+                }
+
+                const currentUser = DataStore.getCurrentUser();
+                area.innerHTML = messages.map(msg => {
+                    const isSelf = currentUser && msg.user.username === currentUser.username;
+                    const senderName = msg.user.fullname || msg.user.username;
+                    const time = new Date(msg.time).toLocaleTimeString('fa-IR');
+                    return `
+                                <div class="msg ${isSelf ? 'self' : 'other'}">
+                                    <div class="sender">
+                                        ${isSelf ? '👨‍🚀 شما' : '👤 ' + senderName}
+                                        <span class="time">${time}</span>
+                                    </div>
+                                    ${msg.message}
+                                </div>
+                            `;
+                }).join('');
+
+                area.scrollTop = area.scrollHeight;
+            },
+
+            renderDataTable() {
+                const tbody = document.getElementById('dataTableBody');
+                const data = DataStore.getCollectedData();
+
+                if (data.length === 0) {
+                    // Add initial demo data
+                    const demoData = [
+                        { source: 'PARSI-SAT-1', type: 'سیگنال رادیویی', location: 'مدار LEO',
+                        status: 'processed' },
+                        { source: 'ایستگاه زمینی - تهران', type: 'داده اینترنت', location: '۳۵°۴۱′N ۵۱°۲۳′E',
+                            status: 'processed' },
+                        { source: 'سیگنال ناشناس', type: 'امواج ناشناس', location: 'مبدأ نامشخص', status: 'pending' },
+                        { source: 'ماهواره خارجی', type: 'داده رمزنگاری‌شده', location: 'مدار GEO', status: 'pending' },
+                        { source: 'ربات جمع‌آوری', type: 'داده سیستمی', location: 'شبکه داخلی', status: 'error' },
+                    ];
+
+                    demoData.forEach(item => {
+                        DataStore.addCollectedData(item);
+                    });
+                }
+
+                const allData = DataStore.getCollectedData();
+                const statusMap = {
+                    'processed': 'پردازش‌شده',
+                    'pending': 'در انتظار',
+                    'error': 'خطا'
+                };
+                const statusClass = {
+                    'processed': 'processed',
+                    'pending': 'pending',
+                    'error': 'error'
+                };
+
+                tbody.innerHTML = allData.slice(-10).reverse().map(item => {
+                    const time = new Date(item.time).toLocaleString('fa-IR');
+                    const icon = SOURCES.find(s => s.name === item.source)?.icon || 'fa-satellite';
+                    const color = SOURCES.find(s => s.name === item.source)?.color || '#00d4ff';
+                    return `
+                                <tr>
+                                    <td><i class="fas ${icon}" style="color:${color};"></i> ${item.source}</td>
+                                    <td>${item.type}</td>
+                                    <td>${item.location || 'نامشخص'}</td>
+                                    <td>${time}</td>
+                                    <td><span class="status-badge ${statusClass[item.status] || 'pending'}">${statusMap[item.status] || 'در انتظار'}</span></td>
+                                </tr>
+                            `;
+                }).join('');
+            },
+
+            renderSources() {
+                const grid = document.getElementById('sourceGrid');
+                const statuses = ['online', 'online', 'online', 'online', 'warning', 'online', 'online', 'warning',
+                    'online', 'online'
+                ];
+
+                grid.innerHTML = SOURCES.slice(0, 10).map((source, index) => {
+                    const status = statuses[index % statuses.length];
+                    return `
+                                <div class="source-item">
+                                    <span class="icon"><i class="fas ${source.icon}" style="color:${source.color};"></i></span>
+                                    <span class="name">${source.name}</span>
+                                    <span class="status-dot ${status}"></span>
+                                </div>
+                            `;
+                }).join('');
+            },
+
+            updateStats() {
+                const data = DataStore.getCollectedData();
+                const total = data.length;
+                const processed = data.filter(d => d.status === 'processed').length;
+                const pending = data.filter(d => d.status === 'pending').length;
+
+                document.getElementById('totalData').textContent = total || '۰';
+                document.getElementById('processedData').textContent = processed || '۰';
+                document.getElementById('pendingData').textContent = pending || '۰';
+            },
+
+            enableChat(enabled) {
+                const input = document.getElementById('chatInput');
+                const sendBtn = document.getElementById('sendBtn');
+                input.disabled = !enabled;
+                sendBtn.disabled = !enabled;
+                if (enabled) {
+                    input.placeholder = 'پیام خود را بنویسید...';
+                } else {
+                    input.placeholder = 'لطفاً وارد شوید...';
+                }
+            },
+
+            bindEvents() {
+                // Register
+                document.getElementById('registerForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const fullname = document.getElementById('regName').value.trim();
+                    const username = document.getElementById('regUser').value.trim();
+                    const password = document.getElementById('regPass').value;
+
+                    if (!fullname || !username || !password) {
+                        showToast('لطفاً همه فیلدها را پر کنید', 'warning');
+                        return;
+                    }
+
+                    const users = DataStore.getUsers();
+                    if (users.find(u => u.username === username)) {
+                        showToast('این نام کاربری قبلاً ثبت شده است', 'error');
+                        return;
+                    }
+
+                    users.push({ fullname, username, password, date: Date.now() });
+                    DataStore.saveUsers(users);
+                    showToast('✅ ثبت‌نام با موفقیت انجام شد!', 'success');
+                    document.getElementById('regName').value = '';
+                    document.getElementById('regUser').value = '';
+                    document.getElementById('regPass').value = '';
+                });
+
+                // Login
+                document.getElementById('loginForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('loginUser').value.trim();
+                    const password = document.getElementById('loginPass').value;
+
+                    if (!username || !password) {
+                        showToast('لطفاً نام کاربری و رمز عبور را وارد کنید', 'warning');
+                        return;
+                    }
+
+                    const users = DataStore.getUsers();
+                    const user = users.find(u => u.username === username && u.password === password);
+
+                    if (user) {
+                        DataStore.setCurrentUser(user);
+                        this.currentUser = user;
+                        this.renderUI();
+                        this.enableChat(true);
+                        this.renderMessages();
+                        document.getElementById('chatStatus').textContent = '✅ متصل به سرور';
+                        showToast(`👨‍🚀 ${user.fullname} عزیز، خوش آمدید!`, 'success');
+                        document.getElementById('loginUser').value = '';
+                        document.getElementById('loginPass').value = '';
+                    } else {
+                        showToast('نام کاربری یا رمز عبور اشتباه است', 'error');
+                    }
+                });
+
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    DataStore.clearCurrentUser();
+                    this.currentUser = null;
+                    this.renderUI();
+                    this.enableChat(false);
+                    document.getElementById('chatStatus').textContent = '⏳ در انتظار اتصال...';
+                    showToast('از سیستم خارج شدید', 'info');
+                });
+
+                // Send message
+                document.getElementById('sendBtn').addEventListener('click', () => {
+                    this.sendMessage();
+                });
+
+                document.getElementById('chatInput').addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            },
+
+            sendMessage() {
+                const input = document.getElementById('chatInput');
+                const message = input.value.trim();
+
+                if (!message) return;
+                if (!this.currentUser) {
+                    showToast('لطفاً ابتدا وارد شوید', 'warning');
+                    return;
+                }
+
+                DataStore.addMessage(this.currentUser, message);
+                this.messages = DataStore.getMessages();
+                this.renderMessages();
+                input.value = '';
+
+                // Simulate server response
+                const responses = [
+                    '📡 پیام شما دریافت و در سرور ذخیره شد.',
+                    '🛰️ داده شما پردازش شد. نتیجه به ماهواره ارسال شد.',
+                    '🔭 اطلاعات شما در حال تحلیل توسط هوش مصنوعی است.',
+                    '🌍 داده شما با سایر منابع تطابق داده شد.',
+                    '📊 داده شما به‌روزرسانی شد و در دیتابیس ذخیره گردید.',
+                    '🚀 ارتباط با ماهواره برقرار شد. داده شما ارسال شد.',
+                    '📡 سیگنال شما دریافت شد. در حال پردازش...',
+                    '🛰️ داده شما در مرکز داده ذخیره شد.',
+                ];
+
+                setTimeout(() => {
+                    const botUser = { username: 'system', fullname: '🛰️ سرور مرکزی' };
+                    const reply = responses[Math.floor(Math.random() * responses.length)];
+                    DataStore.addMessage(botUser, reply);
+                    this.messages = DataStore.getMessages();
+                    this.renderMessages();
+
+                    // Add to collected data
+                    const sources = ['PARSI-SAT-1', 'ایستگاه زمینی - تهران', 'سیگنال رادیویی', 'ربات جمع‌آوری'];
+                    const types = ['سیگنال رادیویی', 'داده رمزنگاری‌شده', 'داده اینترنت', 'امواج الکترونیکی'];
+                    const statuses = ['processed', 'processed', 'pending', 'processed'];
+
+                    DataStore.addCollectedData({
+                        source: sources[Math.floor(Math.random() * sources.length)],
+                        type: types[Math.floor(Math.random() * types.length)],
+                        location: `${Math.floor(Math.random() * 90 + 10)}°${['N','S'][Math.floor(Math.random()*2)]} ${Math.floor(Math.random() * 180 + 1)}°${['E','W'][Math.floor(Math.random()*2)]}`,
+                        status: statuses[Math.floor(Math.random() * statuses.length)]
+                    });
+
+                    this.renderDataTable();
+                    this.updateStats();
+                }, 1000 + Math.random() * 1500);
+            },
+
+            consoleBrand() {
+                console.log('%c 🛰️ PARSI Space Data Center ', 'background:#0a0e1a;color:#00d4ff;font-size:22px;font-weight:bold;padding:14px 28px;border-radius:10px;border:2px solid #00d4ff;');
+                console.log('%c 📡 مرکز داده فضایی پارسی ', 'background:#c9a84c;color:#0a0e1a;font-size:16px;padding:8px 20px;border-radius:6px;font-weight:bold;');
+                console.log(`%c 👤 کاربر فعلی: ${this.currentUser?.fullname || 'هیچکس'}`, 'background:#0a0e1a;color:#00ff88;font-size:12px;padding:4px 12px;');
+                console.log(`%c 💬 تعداد پیام‌ها: ${DataStore.getMessages().length}`, 'background:#0a0e1a;color:#00d4ff;font-size:12px;padding:4px 12px;');
+                console.log(`%c 📊 تعداد داده‌ها: ${DataStore.getCollectedData().length}`, 'background:#0a0e1a;color:#c9a84c;font-size:12px;padding:4px 12px;');
+                console.log('%c 🚀 کاملاً آماده اجرا روی گیت‌هاب ', 'background:#0a0e1a;color:#00ff88;font-size:14px;padding:6px 16px;border-radius:4px;');
             }
-        }
+        };
 
         // ============================================================
-        // TOAST
+        // TOAST SYSTEM
         // ============================================================
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
-            const icons = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-circle', info: 'fa-info-circle' };
-            const colors = { success: '#00ff88', error: '#ff0044', warning: '#ff8800', info: '#00d4ff' };
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-times-circle',
+                warning: 'fa-exclamation-circle',
+                info: 'fa-info-circle'
+            };
+            const colors = {
+                success: '#00ff88',
+                error: '#ff0044',
+                warning: '#ff8800',
+                info: '#00d4ff'
+            };
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.innerHTML = `
@@ -997,25 +1828,44 @@
                     `;
             toast.querySelector('.toast-close').addEventListener('click', () => toast.remove());
             container.appendChild(toast);
-            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 5000);
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 4500);
         }
+
+        // ============================================================
+        // HEADER SCROLL EFFECT
+        // ============================================================
+        (function headerScroll() {
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.pageYOffset > 50);
+            });
+        })();
 
         // ============================================================
         // SIDEBAR TOGGLE
         // ============================================================
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Close sidebar on outside click (mobile)
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.menu-toggle')) {
-                document.getElementById('sidebar').classList.toggle('open');
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('menuToggle');
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
             }
         });
 
         // ============================================================
-        // CONSOLE BRANDING
+        // START APPLICATION
         // ============================================================
-        console.log('%c 🛰️ PARSI Space Data Center ', 'background:#0a0e1a;color:#00d4ff;font-size:22px;font-weight:bold;padding:14px 28px;border-radius:10px;border:2px solid #00d4ff;');
-        console.log('%c 📡 مرکز داده فضایی پارسی ', 'background:#c9a84c;color:#0a0e1a;font-size:16px;padding:8px 20px;border-radius:6px;font-weight:bold;');
-        console.log('%c 🌍 جمع‌آوری و پردازش داده‌های فضایی و ارتباطی ', 'background:#0a0e1a;color:#00ff88;font-size:12px;padding:4px 12px;border-radius:4px;');
-        console.log('%c 🚀 ${new Date().toLocaleString("fa-IR")} ', 'background:#0a0e1a;color:#00d4ff;font-size:11px;padding:4px 12px;border-radius:4px;');
+        document.addEventListener('DOMContentLoaded', () => {
+            ChatEngine.init();
+        });
     </script>
+
 </body>
 </html>
